@@ -7,9 +7,12 @@
  */
 void swap(int *a, int *b)
 {
-	int temp = *a;
-	*a = *b;
-	*b = temp;
+    if (*a != *b)
+    {
+        int temp = *a;
+        *a = *b;
+        *b = temp;
+    }
 }
 
 /**
