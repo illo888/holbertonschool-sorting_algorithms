@@ -7,27 +7,24 @@
 * @left: The left node to swap
 * @right: The right node to swap
 */
-void swap_nodes(listint_t **list, listint_t *left, listint_t *right)
+void swap_nodes(listint_t **list, listint_t *a, listint_t *b)
 {
-if (!left || !right || !list)
-return;
+    if (!a || !b || a == b)
+        return;
 
-left->next = right->next;
-if (right->next)
-right->next->prev = left;
+    a->next = b->next;
+    if (b->next)
+        b->next->prev = a;
 
-right->prev = left->prev;
-if (left->prev)
-left->prev->next = right;
-else
-*list = right;
+    b->prev = a->prev;
+    if (a->prev)
+        a->prev->next = b;
+    else
+        *list = b;
 
-right->next = left;
-left->prev = right;
-
-print_list(*list);
+    b->next = a;
+    a->prev = b;
 }
-
 /**
 * cocktail_sort_list - Sorts a doubly linked list using Cocktail Shaker Sort
 * @list: Double pointer to the head of the list
