@@ -46,6 +46,7 @@ while (swapped)
 swapped = 0;
 
 /* Forward pass */
+void forward_pass(listint_t **list, listint_t **end, int *swapped);
 while (start->next)
 {
 if (start->n > start->next->n)
@@ -64,6 +65,7 @@ swapped = 0;
 end = start;
 
 /* Backward pass */
+void backward_pass(listint_t **list, listint_t **start, listint_t *end, int *swapped);
 while (end->prev)
 {
 if (end->n < end->prev->n)
