@@ -36,7 +36,6 @@ void cocktail_sort_list(listint_t **list)
 {
 int swapped = 1;
 listint_t *start, *end;
-
 if (!list || !*list || !(*list)->next)
 return;
 
@@ -46,35 +45,39 @@ while (swapped)
 swapped = 0;
 
 /* Forward pass */
-while (start->next)
+void forward_pass(listint_t **list, listint_t **end, int *swapped)
 {
-if (start->n > start->next->n)
-{
-swap_nodes(list, start, start->next);
-swapped = 1;
-}
-else
-start = start->next;
-}
+    listint_t *node = *list;
 
-if (!swapped)
-break;
-
-swapped = 0;
-end = start;
+    while (node && node->next)
+    {
+        if (node->n > node->next->n)
+        {
+            swap_nodes(list, node, node->next);
+            print_list(*list);
+            *swapped = 1;
+        }
+        else
+            node = node->next;
+    }
+    *end = node;
+}
 
 /* Backward pass */
-while (end->prev)
+void backward_pass(listint_t **list, listint_t **start, listint_t *end, int *swapped)
 {
-if (end->n < end->prev->n)
-{
-swap_nodes(list, end->prev, end);
-swapped = 1;
-}
-else
-end = end->prev;
-}
-start = end;
-}
-}
+    listint_t *node = end;
 
+    while (node && node->prev)
+    {
+        if (node->n < node->prev->n)
+        {
+            swap_nodes(list, node->prev, node);
+            print_list(*list);
+            *swapped = 1;
+        }
+        else
+            node = node->prev;
+    }
+    *start = node;
+}
